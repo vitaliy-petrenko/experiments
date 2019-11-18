@@ -11,7 +11,6 @@ const sum = number => {
   return buffer
 }
 
-
 console.log(+sum(2)())
 console.log(+sum(5)(2))
 console.log(+sum(1)(2)(3))

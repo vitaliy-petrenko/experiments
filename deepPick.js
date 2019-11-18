@@ -3,8 +3,8 @@ const deepPick = (prop, object) => {
     propList = prop.split('.')
 
   let
-    i         = 0
-    , resProp = object[propList[i++]]
+    i = 0,
+    resProp = object[propList[i++]]
 
   while (i < propList.length && resProp) {
     resProp = resProp[propList[i++]]
@@ -15,36 +15,34 @@ const deepPick = (prop, object) => {
 
 const deepPickRecursion = (prop, object) => {
   const
-    [first, ...rest] = Array.isArray(prop) ? prop : prop.split('.')
-    , resProp        = object[first]
+    [first, ...rest] = Array.isArray(prop) ? prop : prop.split('.'),
+    resProp = object[first]
 
   return rest.length ? deepPickRecursion(rest, resProp) : resProp
 }
 
 const testPerformance = (fn = n => n, iterations = 1000) => {
   const
-    runner   = () => {
+    runner = () => {
       for (let i = 0; i < iterations; i++) {
         fn()
       }
-    }
-    , logger = ms => console.log(`${ms} milliseconds`)
+    },
+    logger = ms => console.log(`${ms} milliseconds`)
 
   if (typeof process !== 'undefined' && typeof process.hrtime === 'function') {
     const t0 = process.hrtime()
     runner()
-    const t1 = process.hrtime(t0)
-    logger(t1)
+    logger(process.hrtime(t0))
   } else {
     const t0 = performance.now()
     runner()
-    const t1 = performance.now()
-    logger(t1 - t0)
+    logger(performance.now() - t0)
   }
 }
 
 const
-  object    = {
+  object = {
     type: 'person',
     data: {
       gender: 'male',
@@ -56,8 +54,8 @@ const
         },
       },
     },
-  }
-  , deepKey = 'data.info.fullname.last'
+  },
+  deepKey = 'data.info.fullname.last'
 
 console.log('------- START TESTING -------')
 

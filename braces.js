@@ -1,7 +1,7 @@
 const
-  BRACES                   = ['{', '}', '(', ')', '[', ']']
-  , isIndexOdd             = charIndex => charIndex % 2 === 1
-  , makeBracePositionError = position => {
+  BRACES = ['{', '}', '(', ')', '[', ']'],
+  isOdd = number => number % 2 === 1,
+  makeBracePositionError = position => {
     throw Error(`wrong brace at position: ${position}`)
   }
 
@@ -13,12 +13,12 @@ const validateBraces = string => {
 
   for (let i = 0; i < string.length; i++) {
     const
-      char         = string[i]
+      char = string[i]
       , braceIndex = BRACES.indexOf(char)
 
     if (!~braceIndex) continue
 
-    if (isIndexOdd(braceIndex)) {
+    if (isOdd(braceIndex)) {
       if (!stack.length) return makeBracePositionError(i)
 
       if (stack[stack.length - 1].brace === BRACES[braceIndex - 1]) {
@@ -47,10 +47,10 @@ const checkBraces = string => {
 }
 
 const
-  string1   = 10
-  , string2 = 'asda(())ki[{}]d'
-  , string3 = 'as[da(d('
-  , string4 = 'asda({{]})d'
+  string1 = 10,
+  string2 = 'asda(())ki[{}]d',
+  string3 = 'as[da(d(',
+  string4 = 'asda({{]})d'
 
 checkBraces(string1)
 checkBraces(string2)
